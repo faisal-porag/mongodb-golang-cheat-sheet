@@ -173,7 +173,7 @@ $unwind - Example & Resource
 ---
 
 
-
+[Query in Array](https://www.youtube.com/watch?v=wPL2i8KHKTI&list=PLA3GkZPtsafZydhN4nP0h7hw7PQuLsBv1&index=23)
 
 
 
