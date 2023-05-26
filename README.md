@@ -1,10 +1,42 @@
-# mongodb-golang-cheat-sheet
-mongodb &amp; golang
+# MongoDB GoLang Cheat Sheet
+### MongoDB &amp; GoLang
 
 ---
 
-Mongodb-Aggregation
-----------------------------------------------------------------------------------------------------------------------------
+#### MongoDB --->>> Aggregation & Others Operations
+----------------------------------------------------
+
+##### CRUD OPERATIONS IN MONGO DB
+
+> CREATE HAS TWO METHODS
+
+```mongo
+db.collectionName.insertOne(data, operations)
+db.collectionName.insertMany(data, operations)
+```
+
+> READ HAS TWO METHODS
+
+```mongo
+db.collectionName.find(filter, operations)
+db.collectionName.findOne(filter, operations)
+```
+
+> UPDATE HAS THREE METHODS
+
+
+```mongo
+db.collectionName.updateOne(filter, data, operations)
+db.collectionName.updateMany(filter, data, operations)
+db.collectionName.replaceOne(filter, data, operations)
+```
+
+> DELETE HAS TWO METHODS
+
+```mongo
+db.collectionName.deleteOne(filter, operations)
+db.collectionName.deleteMany(filter, operations)
+```
 
 
 1.  Group by age and show the names in this group 
