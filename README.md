@@ -79,6 +79,71 @@ countOfTeacherInThisAgeGroup: -1
 )
 ```
 
+5.  List All hobbies
+```mongo
+db.teachers.aggregate(
+	[
+		{
+			$unwind: “$hobbies”
+},
+		{
+			$group: {
+_id: null,
+ all_hobbies: {$push: “$hobbies”} 
+}
+},
+]
+)
+```
+
+6.  List All hobbies but unique ($addToSet -> for remove duplicates)
+```mongo
+db.teachers.aggregate(
+	[
+		{
+			$unwind: “$hobbies”
+},
+		{
+			$group: {
+_id: null,
+ all_hobbies: {$addToSet: “$hobbies”} 
+}
+},
+])
+```
+
+7. Find average of scores of students whose age is greater than 20 
+```mongo
+db.students.aggregate([
+{
+$group: {
+_id: null,
+avgScore: {
+$avg: {
+$filter: {
+input: "$scores”,
+as: "score",
+cond: { $gt: [ "Sage", 20] }
+}
+}
+	}
+
+}
+}
+])
+```
+
+$unwind - Example & Resource
+[Read $unwind](https://www.bmc.com/blogs/mongodb-unwind/)
+
+
+
+
+
+
+
+
+
 
 
 
