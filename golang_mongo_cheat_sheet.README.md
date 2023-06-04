@@ -48,6 +48,65 @@ type Document struct {
 
 ---
 
+> `like` in mongo using go
+
+```go
+// Define the search pattern
+	searchPattern := "app" // Example search pattern, e.g., "app" matches "apple", "application", etc.
+
+	// Create a regular expression pattern for the "name" field
+	regexPattern := bson.M{
+		"$regex":   searchPattern,
+		"$options": "i", // Case-insensitive search
+	}
+
+	// Define the filter query
+	filter := bson.M{
+		"name": regexPattern,
+	}
+```
+
+---
+
+> Json array size count in mongo using go 
+
+```go
+// Define the filter query
+	filter := bson.M{
+		"products": bson.M{
+			"$exists": true, // Optional: Include this if you want to filter documents that have the "products" field
+			"$size":   3,    // Specify the desired array size
+		},
+	}
+
+	// Execute the count query
+	count, err := collection.CountDocuments(context.Background(), filter)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("Array size count:", count)
+```
+
+---
+
+
+> Compair with two field in mongo using go
+
+```go
+// Define the filter query with $expr
+	filter := bson.M{
+		"$expr": bson.M{
+			"$gt": []interface{}{
+				"$quantity",
+				"$price",
+			},
+		},
+	}
+```
+
+---
+
 
 > Multiple collection join 
 
