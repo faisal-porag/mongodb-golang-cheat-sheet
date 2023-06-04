@@ -4,6 +4,18 @@
 > document that have atleast one product with name apple and quantity 15 in json array using mongo in go 
 
 ```go
+type Product struct {
+	Name     string `bson:"name"`
+	Quantity int    `bson:"quantity"`
+}
+
+type Document struct {
+	ID       int       `bson:"_id"`
+	Products []Product `bson:"products"`
+}
+```
+
+```go
 // Define the query
 	filter := bson.M{
 		"products": bson.M{
@@ -14,6 +26,29 @@
 		},
 	}
 ```
+
+> get only matched item from json array 
+
+```go
+// Define the query
+	filter := bson.M{
+		"products": bson.M{
+			"$elemMatch": bson.M{
+				"name":     "apple",
+				"quantity": bson.M{"$gt": 15},
+			},
+		},
+	}
+
+	// Define the projection to return only the matched products
+	projection := bson.M{
+		"products.$": 1,
+	}
+```
+
+---
+
+
 > Multiple collection join 
 
 ```go
