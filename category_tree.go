@@ -98,6 +98,36 @@ func GenerateCategoryTree(categories []*Category) []*Category {
 	return roots
 }
 
+func GenerateCategoryTreeV1(categories []*Category, depth int) []*Category {
+	// Create a map to store categories by ID
+	categoryMap := make(map[int]*Category)
+
+	// Traverse the categories to populate the map
+	for _, category := range categories {
+		categoryMap[category.CategoryID] = category
+	}
+
+	// Create a slice to store root categories
+	var roots []*Category
+
+	// Traverse the categories to build the tree
+	for _, category := range categories {
+		parentID := category.ParentID
+
+		// If the category has a parent, add it as a child to the parent category
+		if parent, ok := categoryMap[parentID]; ok {
+			if depth > 1 {
+				parent.Children = append(parent.Children, category)
+			}
+		} else {
+			// If the category has no parent, it is a root category
+			roots = append(roots, category)
+		}
+	}
+
+	return roots
+}
+
 func connectDB() (*mongo.Client, error) {
 	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017")
 	client, err := mongo.Connect(context.Background(), clientOptions)
